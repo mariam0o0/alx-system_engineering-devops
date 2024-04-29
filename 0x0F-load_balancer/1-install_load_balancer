@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# configures a new HAproxy as a load balancer
+
+apt-get -y update
+apt-get -y install haproxy=1.6.\*
+
+echo '
+frontend sammykingx.tech
+        bind 0:80
+        default_backend web_servers
+
+backend web_servers
+        balance roundrobin
+        server 531224-web-01 52.23.213.177:80
+        server 531224-web-02 100.25.148.71:80
+' >> /etc/haproxy/haproxy.cfg
+
+service haproxy restart
