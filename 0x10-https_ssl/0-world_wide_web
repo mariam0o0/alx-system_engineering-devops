@@ -1,33 +1,20 @@
 #!/usr/bin/env bash
-# Displays Imformation about subdomains
+# A Bash script that will display information about the subdomains
 
-display_info() {
-    local domain="$1"
-    local subdomain="$2"
-
-    if [[ -z "$subdomain" ]]; then
-        subdomains=("www" "lb-01" "web-01" "web-02")
-    else
-        subdomains=("$subdomain")
-    fi
-
-    for sub in "${subdomains[@]}"; do
-        info=$(dig +short "$sub.$domain")
-
-        if [[ -n "$info" ]]; then
-            record_type=$(dig +short "$sub.$domain" | awk 'NR==1 {print $4}')
-            destination=$(dig +short "$sub.$domain")
-            echo "The subdomain $sub is a $record_type record and points to $destination"
-        fi
-    done
-}
-
-if [[ $# -lt 1 ]]; then
-    echo "Usage: $0 <domain> [subdomain]"
-    exit 1
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 domain [subdomain1 subdomain2 ...]"
+  exit 1
 fi
-
 domain="$1"
-subdomain="$2"
-
-display_info "$domain" "$subdomain"
+subdomains=("www" "lb-01" "web-01" "web-02")
+if [ $# -gt 1 ]; then
+  subdomains+=("${@:2}")
+fi
+for subdomain in "${subdomains[@]}"; do
+  output=$(dig "$subdomain.$domain" +short)
+  if [ -n "$output" ]; then
+    echo "The subdomain $subdomain has IP address $output"
+  else
+    echo "The subdomain $subdomain does not exist"
+  fi
+done
