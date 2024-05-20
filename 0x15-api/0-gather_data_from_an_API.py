@@ -6,9 +6,9 @@ import sys
 
 if __name__ == "__main__":
 
-    userId = sys.argv[1]
+    UId = sys.argv[1]
     user = requests.get("https://jsonplaceholder.typicode.com/users/{}"
-                        .format(userId))
+                        .format(UId))
 
     name = user.json().get('name')
 
@@ -17,7 +17,7 @@ if __name__ == "__main__":
     completed = 0
 
     for task in todos.json():
-        if task.get('userId') == int(userId):
+        if task.get('UId') == int(UId):
             totalTasks += 1
             if task.get('completed'):
                 completed += 1
@@ -26,4 +26,4 @@ if __name__ == "__main__":
           .format(name, completed, totalTasks))
 
     print('\n'.join(["\t " + task.get('title') for task in todos.json()
-          if task.get('userId') == int(userId) and task.get('completed')]))
+          if task.get('UId') == int(UId) and task.get('completed')]))
