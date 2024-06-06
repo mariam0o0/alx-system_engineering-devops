@@ -3,15 +3,18 @@
 
 import requests
 
-
 def number_of_subscribers(subreddit):
     """Function that queries the Reddit API"""
-    req = requests.get(
-        "https://www.reddit.com/dev/api/{}/about.json".format(subreddit),
-        headers={"User-Agent": "Custom"},
-    )
-
-    if req.status_code == 200:
-        return req.json().get("data").get("subscribers")
-    else:
+    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    headers = {"User-Agent": "Custom"}
+    
+    try:
+        req = requests.get(url, headers=headers, allow_redirects=False)
+        
+        if req.status_code == 200:
+            data = req.json().get("data", {})
+            return data.get("subscribers", 0)
+        else:
+            return 0
+    except Exception as e:
         return 0
