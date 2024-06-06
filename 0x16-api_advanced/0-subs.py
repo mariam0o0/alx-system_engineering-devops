@@ -1,21 +1,21 @@
 #!/usr/bin/python3
-"""
-function that queries the Reddit API and
-returns the number of subscribers
-"""
+"""queries the Reddit API and returns the number of subscribers"""
 import requests
 
 
 def number_of_subscribers(subreddit):
-    if subreddit is None or type(subreddit) is not str:
+    """Return the total number of subscribers on a given subreddit."""
+    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+
+    headers = {'User-Agent': 'RedditDataAnalyzer/1.0 (ALX Africa)'}
+
+    response = requests.get(url, headers=headers, allow_redirects=False)
+
+    if response.status_code == 200:
+        data = response.json()
+
+        subscribers = data.get('data', {}).get('subscribers', 0)
+
+        return subscribers
+    else:
         return 0
-
-    base_url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
-    headers = {'User-Agent': '0x16-api_advanced_project'}
-    r = requests.get(base_url, headers=headers, allow_redirects=False).json()
-
-    if r.get('data') is None:
-        return 0
-
-    subscribers = r.get('data').get('subscribers')
-    return subscribers
