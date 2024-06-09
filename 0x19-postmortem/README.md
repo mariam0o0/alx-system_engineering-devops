@@ -1,9 +1,13 @@
-Postmortem: Web Stack Outage on June 1, 2024
-Issue Summary
+## Postmortem: Web Stack Outage on June 1, 2024
+
+#Issue Summary
 Duration of the Outage: June 1, 2024, 10:00 AM - 12:30 PM (EDT)
-Impact: Our primary web application was inaccessible to users. Approximately 85% of users experienced inability to load the main page or faced severe loading delays.
-Root Cause: A misconfiguration in the load balancer led to a failure in distributing traffic correctly across the servers, causing server overload and subsequent downtime.
-Timeline
+
+#Impact: Our primary web application was inaccessible to users. Approximately 85% of users experienced inability to load the main page or faced severe loading delays.
+
+#Root Cause: A misconfiguration in the load balancer led to a failure in distributing traffic correctly across the servers, causing server overload and subsequent downtime.
+
+#Timeline
 10:05 AM: Issue detected by monitoring alert indicating high response time and error rates.
 10:10 AM: Initial investigation by the on-call engineer focusing on application server logs.
 10:20 AM: Misleading path taken, suspecting a database issue due to error patterns in logs.
@@ -14,7 +18,9 @@ Timeline
 11:30 AM: Corrected the load balancer configuration.
 12:00 PM: Restarted the affected servers and monitored recovery.
 12:30 PM: Full service restored, and systems operating normally.
-Root Cause and Resolution
+
+#Root Cause and Resolution
+
 Root Cause:
 The issue was caused by a misconfiguration in the load balancer settings. Specifically, a recent update to the load balancer's configuration script inadvertently set an incorrect parameter for traffic distribution, causing all traffic to be directed to a single server rather than being evenly distributed across multiple servers.
 
@@ -26,7 +32,8 @@ Validating the configuration across all load balancers.
 Restarting the load balancers to apply the new settings.
 Gradually restarting the overloaded servers to ensure stability.
 Monitoring the system closely to confirm the issue was resolved.
-Corrective and Preventative Measures
+
+#Corrective and Preventative Measures
 Improvements:
 
 Configuration Management:
@@ -40,7 +47,8 @@ Set up more granular alerting to detect load balancer misconfigurations earlier.
 Incident Response:
 
 Develop and train on improved incident response playbooks, focusing on quicker identification of network-related issues.
-Task List:
+
+#Task List:
 
 Patch Load Balancer Configuration:
 
