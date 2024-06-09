@@ -6,16 +6,7 @@
 - **Root Cause:** A misconfiguration in the load balancer led to a failure in distributing traffic correctly across the servers, causing server overload and subsequent downtime.
 
 ## Timeline
-10:05 AM: Issue detected by monitoring alert indicating high response time and error rates.
-10:10 AM: Initial investigation by the on-call engineer focusing on application server logs.
-10:20 AM: Misleading path taken, suspecting a database issue due to error patterns in logs.
-10:30 AM: Escalated to the backend engineering team for deeper analysis.
-10:45 AM: Network team involved after initial investigation revealed no issues with the database.
-11:00 AM: Discovered a spike in server load; suspected a DDoS attack and implemented basic mitigation.
-11:20 AM: Realized load balancer misconfiguration after reviewing network traffic distribution.
-11:30 AM: Corrected the load balancer configuration.
-12:00 PM: Restarted the affected servers and monitored recovery.
-12:30 PM: Full service restored, and systems operating normally.
+![Outage Timeline](586b6bf3-1b59-42c8-a63d-b6c424e89f30)
 
 
 ## Root Cause and Resolution
