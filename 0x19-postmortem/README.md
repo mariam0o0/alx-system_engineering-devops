@@ -3,9 +3,11 @@
 # Issue Summary
 Duration of the Outage: June 1, 2024, 10:00 AM - 12:30 PM (EDT)
 
-# Impact: Our primary web application was inaccessible to users. Approximately 85% of users experienced inability to load the main page or faced severe loading delays.
+# Impact:
+Our primary web application was inaccessible to users. Approximately 85% of users experienced inability to load the main page or faced severe loading delays.
 
-# Root Cause: A misconfiguration in the load balancer led to a failure in distributing traffic correctly across the servers, causing server overload and subsequent downtime.
+# Root Cause:
+A misconfiguration in the load balancer led to a failure in distributing traffic correctly across the servers, causing server overload and subsequent downtime.
 
 # Timeline
 10:05 AM: Issue detected by monitoring alert indicating high response time and error rates.
